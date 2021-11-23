@@ -8,10 +8,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create, :destroy]
 
-  get '/auth/facebook' => 'sessions#create_from_facebook'
-  post '/auth/facebook' => 'sessions#create_from_facebook'
-
-  match '/auth/facebook/callback' => 'sessions#create_from_facebook', via: [:get, :post]
+  get '/auth/facebook/callback' => 'sessions#create_from_facebook'
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
