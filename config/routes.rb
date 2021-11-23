@@ -8,26 +8,15 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create, :destroy]
 
-  # get '/auth/facebook/callback' => 'sessions#create_from_facebook'
   get '/auth/facebook' => 'sessions#create_from_facebook'
   post '/auth/facebook' => 'sessions#create_from_facebook'
 
-  # devise_for :users, controllers: { omniauth_callbacks: '/omniauth_callbacks_test' }
-  # devise_scope :admin do
-  #   get 'login', to: 'sessions#new', as: :new_user_session
-  #   get 'logout', to: 'sessions#destroy', as: :destroy_user_session
-  # end
-
-  get '/auth/google_oauth2/callback' => 'sessions#omniauth'
-  get '/auth/google_oauth2' => 'sessions#omniauth'
-
   match '/auth/facebook/callback' => 'sessions#create_from_facebook', via: [:get, :post]
-  # match '/auth/facebook' => 'sessions#create_from_facebook', via: [:get, :post]
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  get 'logout' => 'sessions#destroy'
+  delete 'logout' => 'sessions#destroy'
 
   get 'requests/:id/delete' => 'requests#destroy'
   get 'categories/:id/delete' => 'categories#destroy'
