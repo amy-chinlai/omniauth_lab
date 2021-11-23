@@ -7,5 +7,5 @@ class Category < ApplicationRecord
     "Letter Campaigns", 
     "Petitions",
     "User Interface"
-]
+    ]
 end

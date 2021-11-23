@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
     def new
-
     end
 
     def create
@@ -15,12 +14,6 @@ class SessionsController < ApplicationController
     end
 
     def create_from_facebook
-        # @user = User.find_or_create_by(uid: auth['uid']) do |u|
-        #     u.name = auth['info']['name']
-        #     u.email = auth['info']['email']
-        #     u.image = auth['info']['image']
-        # end
-
         @user = User.find_or_create_by(uid: auth['uid'])
         @user.name = auth['info']['name']
         @user.email = auth['info']['email']
@@ -44,7 +37,6 @@ class SessionsController < ApplicationController
     private
 
     def auth
-        puts request.env['omniauth.auth']
       request.env['omniauth.auth']
     end
 
