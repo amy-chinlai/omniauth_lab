@@ -1,0 +1,13 @@
+<h1>Most Voted for Feature Requests</h1>
+<ol>
+    <% @requests.map do |r| %>
+        <li><%= r.name %> 
+        <ul>
+            <li><%= link_to "More Details", request_path(r) %>
+            <li><%= r.total_votes %></li>
+            <li><%= link_to "Down Vote", new_request_vote_path(r, :vote_type => -1 )%></li>
+            <li><%= link_to "Up Vote", new_request_vote_path(r, :vote_type => 1 )%></li>
+        </ul>
+        </li>
+<% end %>
+</ol>

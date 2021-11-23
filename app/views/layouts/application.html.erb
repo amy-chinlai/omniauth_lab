@@ -1,15 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OmniauthLab</title>
+    <title>Phase3ProjectFeatureRequests</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+   
+
+
+
   </head>
 
+
   <body>
-    <%= yield %>
+  <div class="header">
+  <span><h1>Feature Requests</h1>
+    <% flash.each do |type, msg| %>
+      <div class="alert">
+        <%= msg %>
+      </div>
+    <% end %></span>
+  </div>
+    <% if current_user %>
+    <div class="sidebar">
+        <ul>
+            <li><%= link_to "All Feature Requests", requests_path %></li>
+            <li><%= link_to "New Feature Request", new_request_path %></li>
+            <li><%= link_to("My Feature Requests", "/users/#{current_user.id}/requests", method: :my_requests) %></li>
+            <li><%= link_to("My Votes", "/users/#{current_user.id}/votes", method: :my_votes) %></li>    
+            <li><%= link_to("Most Votes", "/most_votes", method: :most_votes) %></li>
+            <% if current_user.admin %>
+              <li><%= link_to("All Categories", categories_path) %></li>
+              <% end %>
+            <li><%= link_to("Log Out", logout_path, method: :delete)  if logged_in? %></li>
+        </ul>
+    </div>
+    <% end %>
+  <div class="content">
+  <%= yield %>
+  </div>
+  
+
   </body>
 </html>

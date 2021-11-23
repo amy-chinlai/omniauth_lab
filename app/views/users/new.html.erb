@@ -1,0 +1,25 @@
+<h1>Sign Up</h1>
+<% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |m| %>
+        <div class="alert">
+        <%= m %>
+        </div>
+    <% end %>
+<% end %>
+<%= form_for @user do |f| %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email %><br>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
+
+    <%= f.label :organization %>
+    <%= f.select :organization, User::ORGANIZATIONS, include_blank: 'Select' %><br>
+
+    <%= f.submit %>
+
+<% end %>
+<p>Returning user? <%= link_to "Log in now!", login_path %></p>
+<%= button_to('Log in with Facebook!', '/auth/facebook') %>
+<%= button_to('Log in with Google!', '/auth/google_oauth2') %>

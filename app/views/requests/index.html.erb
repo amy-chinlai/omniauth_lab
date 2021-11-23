@@ -1,0 +1,6 @@
+<h1>All Feature Requests</h1>
+
+<% @category.each do |c| %>
+    <h2><%= c.name %></h2>
+    <%= render partial: 'display',  locals: {requests: c.requests }%>
+<% end %>

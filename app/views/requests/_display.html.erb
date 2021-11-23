@@ -1,0 +1,17 @@
+<table class="requests_display">
+<% if requests != [] %>
+
+<% requests.each do |r|  %>
+    <tr>
+        <td><%= r.name %></td>
+        <td><%= link_to "More Details", request_path(r) %></td>
+        <td class="total_votes">Vote Total: <%= r.total_votes %></td>
+        <td><%= link_to "Down Vote", new_request_vote_path(r, :vote_type => -1 )%></td>
+        <td><%= link_to "Up Vote", new_request_vote_path(r, :vote_type => 1 )%></td>
+    </tr>
+
+<% end %>
+<% else %>
+No requests for this feature!
+<% end %>
+</table>

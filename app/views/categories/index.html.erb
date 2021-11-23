@@ -1,0 +1,8 @@
+<h1>Categories</h1>
+<p><%= link_to "New Category", new_category_path %>
+
+<ul>
+<% @categories.each do |c| %>
+    <li><%= c.name %> - <%= link_to "Delete Category", "/categories/#{c.id}/delete" %></li>
+<% end %>
+</ul>

@@ -1,0 +1,20 @@
+<h1>My Votes</h1>
+
+<table>
+<tr>
+    <th>Feature</th>
+    <th></th>
+    <th>Total Votes</th>
+    <th>My Vote</th>
+</tr>
+<% @votes.each do |v| %>
+    <tr>
+        <td><%= v.request.name %></td>
+        <td><%= link_to "More Details", request_path(v.request) %></td>
+        <td><%= v.request.total_votes %></td>
+        <td><%= v.vote_type %></td>
+    </tr>
+
+<% end %>
+
+</table>

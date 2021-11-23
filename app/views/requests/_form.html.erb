@@ -1,0 +1,26 @@
+<% if @request.errors.any? %>
+    <% @request.errors.full_messages.each do |m| %>
+        <div class="alert">
+        <%= m %>
+        </div>
+    <% end %>
+<% end %>
+
+<%= form_for @request do |f| %>
+
+
+    <%= f.hidden_field :creator_id, value: current_user.id %>
+    
+    <%= f.label "Category" %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: 'Select' }) %><br><br>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %><br><br>
+
+    <%= f.label :description %>
+    <%= f.text_area :description %><br><br>
+
+    <%= f.submit %>
+    
+
+<% end %>
