@@ -15,36 +15,26 @@ class SessionsController < ApplicationController
     end
 
     def create_from_facebook
-        puts "env key below"
-        puts ENV['FACEBOOK_KEY']
-        puts ENV['FACEBOOK_SECRET']
-        puts "auth below"
-        puts auth || "nothing here"
-        @user = User.find_or_create_by(uid: auth['uid']) do |u|
-            u.name = auth['info']['name']
-            u.email = auth['info']['email']
-            u.image = auth['info']['image']
-          end
+        # @user = User.find_or_create_by(uid: auth['uid']) do |u|
+        #     u.name = auth['info']['name']
+        #     u.email = auth['info']['email']
+        #     u.image = auth['info']['image']
+        # end
+
+        @user = User.find_or_create_by(uid: auth['uid'])
+        @user.name = auth['info']['name']
+        @user.email = auth['info']['email']
+        @user.image = auth['info']['image']
+        puts @user.attributes
+        @user.save!
+        puts @user.attributes
       
-          session[:user_id] = @user.id
+        log_in(@user)
+        puts "session below"
+        puts session[:user_id]
       
-          redirect_to requests_path
+        redirect_to requests_path
     end
-
-    # def omniauth
-    #     @user = User.find_or_create_by(username: auth[:info][:email]) do |u|
-    #         u.email = auth[:info][:email]
-    #         u.name = auth[:info][:name]
-    #         u.uid = auth[:uid]
-    #     end
-
-    #     if @user.valid?
-    #         session[:user_id] = @user.id
-    #         redirect_to requests_path
-    #     else
-    #         flash[:message] = "Credentials Error"
-    #     end
-    # end
 
     def destroy
         log_out
@@ -54,9 +44,7 @@ class SessionsController < ApplicationController
     private
 
     def auth
-      request.env['omniauth.auth']
-      puts "requested auth!"
-      puts request.env['omniauth.auth']
+        puts request.env['omniauth.auth']
       request.env['omniauth.auth']
     end
 
