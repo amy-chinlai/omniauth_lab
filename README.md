@@ -29,4 +29,4 @@ Bug reports and pull requests are welcome at https://github.com/amy-chinlai/phas
 
 ## License
 
-This project is available as open source under the terms of the MIT license: MIT License
+This project is available as open source under the terms of the MIT license: http://opensource.org/licenses/MIT
